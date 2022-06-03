@@ -1,5 +1,5 @@
-module.exports = class Init1654236050687 {
-  name = 'Init1654236050687'
+module.exports = class Init1654238603935 {
+  name = 'Init1654238603935'
 
   async up(db) {
     await db.query(`CREATE TABLE "token_day_data" ("id" character varying NOT NULL, "date" TIMESTAMP WITH TIME ZONE, "price" text, "daily_volume_token" text, "daily_volume_usd" text, "daily_tx_count" numeric, "token_id" character varying, CONSTRAINT "PK_73fc06337215e86196b36822116" PRIMARY KEY ("id"))`)
@@ -94,8 +94,6 @@ module.exports = class Init1654236050687 {
     await db.query(`CREATE INDEX "IDX_6d46d23e044090b42ab65893d0" ON "balance_changed_record" ("token_id") `)
     await db.query(`CREATE TABLE "total_balance_changed_record" ("id" character varying NOT NULL, "balance" text, "block_number" numeric, "timestamp" TIMESTAMP WITH TIME ZONE, "token_id" character varying, CONSTRAINT "PK_4daa1601019c9cdfdecaf07f33f" PRIMARY KEY ("id"))`)
     await db.query(`CREATE INDEX "IDX_41f4412f9e113a57c75eb0620e" ON "total_balance_changed_record" ("token_id") `)
-    await db.query(`CREATE TABLE "swap" ("id" character varying NOT NULL, "timestamp" numeric NOT NULL, "block_number" integer NOT NULL, "event_idx" integer NOT NULL, "step" integer NOT NULL, "from_currency" text NOT NULL, "to_currency" text NOT NULL, "from_amount" numeric NOT NULL, "to_amount" numeric NOT NULL, CONSTRAINT "PK_4a10d0f359339acef77e7f986d9" PRIMARY KEY ("id"))`)
-    await db.query(`CREATE TABLE "liquidity_change" ("id" character varying NOT NULL, "timestamp" numeric NOT NULL, "block_number" integer NOT NULL, "event_idx" integer NOT NULL, "step" integer NOT NULL, "reason" character varying(6) NOT NULL, "currency_zero" text NOT NULL, "currency_one" text NOT NULL, "amount_zero" numeric NOT NULL, "amount_one" numeric NOT NULL, "balance_zero" numeric NOT NULL, "balance_one" numeric NOT NULL, CONSTRAINT "PK_470573b79a4d135580c7e7c8179" PRIMARY KEY ("id"))`)
     await db.query(`ALTER TABLE "token_day_data" ADD CONSTRAINT "FK_b8950a8bc7b60231137573740ea" FOREIGN KEY ("token_id") REFERENCES "token"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
     await db.query(`ALTER TABLE "pool_hour_data" ADD CONSTRAINT "FK_45e83e45011ed1000559b91726f" FOREIGN KEY ("pool_id") REFERENCES "pool"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
     await db.query(`ALTER TABLE "pool_hour_data" ADD CONSTRAINT "FK_72712fb88a20b4bbea67061b827" FOREIGN KEY ("token0_id") REFERENCES "token"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
@@ -252,8 +250,6 @@ module.exports = class Init1654236050687 {
     await db.query(`DROP INDEX "public"."IDX_6d46d23e044090b42ab65893d0"`)
     await db.query(`DROP TABLE "total_balance_changed_record"`)
     await db.query(`DROP INDEX "public"."IDX_41f4412f9e113a57c75eb0620e"`)
-    await db.query(`DROP TABLE "swap"`)
-    await db.query(`DROP TABLE "liquidity_change"`)
     await db.query(`ALTER TABLE "token_day_data" DROP CONSTRAINT "FK_b8950a8bc7b60231137573740ea"`)
     await db.query(`ALTER TABLE "pool_hour_data" DROP CONSTRAINT "FK_45e83e45011ed1000559b91726f"`)
     await db.query(`ALTER TABLE "pool_hour_data" DROP CONSTRAINT "FK_72712fb88a20b4bbea67061b827"`)

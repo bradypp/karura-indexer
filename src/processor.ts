@@ -1,4 +1,3 @@
-import * as handlers from "./mappings"
 import { lookupArchive } from "@subsquid/archive-registry"
 import { SubstrateProcessor } from "@subsquid/substrate-processor"
 
@@ -11,8 +10,5 @@ processor.setDataSource({
 })
 processor.setTypesBundle("karura")
 processor.setBlockRange({ from: 1600000 })
-processor.addEventHandler("dex.Swap", handlers.handleSwap)
-processor.addEventHandler("dex.AddLiquidity", handlers.handleAddLiquidity)
-processor.addEventHandler("dex.RemoveLiquidity", handlers.handleRemoveLiquidity)
 
 processor.run()
